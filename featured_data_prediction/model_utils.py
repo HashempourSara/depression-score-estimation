@@ -17,9 +17,9 @@ from tcn import TCN
 def model_arch(input_dim, timesteps):
     krl_init = glorot_normal(seed=42)
     i = Input(shape=(timesteps, input_dim, 1), name='inp')
-    h = Conv2D(filters=64, kernel_size=3, strides=(1, 5), activation='relu', 
+    h = Conv2D(filters=64, kernel_size=5, strides=(3, 3), activation='relu', 
               name='conv2_1', kernel_initializer=krl_init, data_format='channels_last')(i)
-    h = Conv2D(filters=64, kernel_size=3, strides=(1, 3), activation='relu', 
+    h = Conv2D(filters=64, kernel_size=3, strides=(2, 2), activation='relu', 
               name='conv2_2', kernel_initializer=krl_init, data_format='channels_last')(h)
     s = K.int_shape(h)
     h = Reshape((s[1], s[2]*s[3]))(h)
